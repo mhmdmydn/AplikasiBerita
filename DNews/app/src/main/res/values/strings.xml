@@ -1,0 +1,13 @@
+<resources>
+    
+    <string name="app_name">DNews</string>
+    <string name="developby">DNews Developed by Ghodel</string>
+    
+    <string name="title_general">General</string>
+    <string name="title_business">Business</string>
+    <string name="title_entertainment">Entertainment</string>
+    <string name="title_health">Health</string>
+    <string name="title_sports">Sports</string>
+    <string name="title_technology">technology</string>
+    
+</resources>

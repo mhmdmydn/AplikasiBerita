@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_80">80dp</dimen>
+    <dimen name="margin_100">100dp</dimen>
+    <dimen name="margin_110">110dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
+    <dimen name="margin_135">135dp</dimen>
+    <dimen name="margin_150">150dp</dimen>
+    <dimen name="margin_200">200dp</dimen>
+    <dimen name="margin_210">210dp</dimen>
+    <dimen name="margin_230">230dp</dimen>
+    <dimen name="margin_270">270dp</dimen>
+    <dimen name="margin_start_left">15dp</dimen>
+
+    <dimen name="text_30">30sp</dimen>
+    <dimen name="title_size">25sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="title_card_size">18sp</dimen>
+    <dimen name="subtitle_card_size">14sp</dimen>
+
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="big_corner_radius">25dp</dimen>
+
+    <dimen name="stroke">3dp</dimen>
+    <dimen name="elevation">10dp</dimen>
+
+    <dimen name="search_icon">38dp</dimen>
+    <dimen name="indicator_height">6dp</dimen>
+    <dimen name="indicator_width">35dp</dimen>
+    <dimen name="progress_bar_height">1.5dp</dimen>
+
+    <dimen name="bottomsheetHeight">200dp</dimen>
+
+</resources>
