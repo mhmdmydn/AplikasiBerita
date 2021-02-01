@@ -27,13 +27,19 @@ import java.io.InputStreamReader;
 import org.json.JSONArray;
 import java.util.ArrayList;
 import android.content.DialogInterface;
+import com.del.dnews.helper.HttpTaskLoader;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.Context;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
+    
 
     private Toolbar toolbar;
     private CardView cardGeneral, cardBusiness, cardEntertainment, cardHealth, cardSports, cardTechnology;
     private SPUtils sp;
     private String countryCodeUser;
+    
     private List<ModelNews> modelNews = new ArrayList<>();
     
     @Override
@@ -49,11 +55,17 @@ public class MainActivity extends BaseActivity  {
     public void initViews() {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         cardBusiness = (CardView)findViewById(R.id.card_business);
+        cardBusiness.setOnClickListener(this);
         cardGeneral = (CardView)findViewById(R.id.card_general);
+        cardGeneral.setOnClickListener(this);
         cardEntertainment = (CardView)findViewById(R.id.card_entertainment);
+        cardEntertainment.setOnClickListener(this);
         cardHealth = (CardView)findViewById(R.id.card_health);
+        cardHealth.setOnClickListener(this);
         cardSports = (CardView)findViewById(R.id.card_sports);
+        cardSports.setOnClickListener(this);
         cardTechnology = (CardView)findViewById(R.id.card_technology);
+        cardTechnology.setOnClickListener(this);
     }
 
     @Override
@@ -79,64 +91,46 @@ public class MainActivity extends BaseActivity  {
                     onBackPressed();
                 }
          });
-    
-        cardGeneral.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                    String URL = ConstantsNews.BaseUrl + countryCodeUser + ConstantsNews.ApiKey;        
-                    MainUtils.showDialog(MainActivity.this, URL, new DialogInterface.OnClickListener(){
-
-                            @Override
-                            public void onClick(DialogInterface p1, int p2) {
-                                p1.dismiss();
-                            }
-                        });
-                   }
-            });
-            
-        cardBusiness.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                    try {
-                        MainUtils.showToast(MainActivity.this, sp.loadStringFromSharedPref("countryCode").toLowerCase());
-                    } catch (Exception e) {}
-                }
-            });
-            
-        cardEntertainment.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                }
-            });
-            
-        cardHealth.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                }
-            });
-            
-        cardSports.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                }
-            });
-            
-        cardTechnology.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View p1) {
-                }
-            });        
     }
+    
+    @Override
+    public void onClick(View v) {
+        
+        switch(v.getId()){
+            case R.id.card_business:
+                startActivity(new Intent(this, BusinessActivity.class));
+            break;
+            
+            case R.id.card_general:
+                startActivity(new Intent(this, GeneralActivity.class));
+            break;
+            
+            case R.id.card_entertainment:
+                startActivity(new Intent(this, EntertainmentActivity.class));
+            break;
+            
+            case R.id.card_sports:
+                startActivity(new Intent(this, SportsActivity.class));
+            break;
+            
+            case R.id.card_health:
+                startActivity(new Intent(this, HealthActivity.class));
+            break;
+            
+            case R.id.card_technology:
+                startActivity(new Intent(this, TechnologyActivity.class));
+            break;
+            
+           default:
+           break;
+        }
+    }
+    
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
     }
+    
 }

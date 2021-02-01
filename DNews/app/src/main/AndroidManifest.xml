@@ -41,6 +41,30 @@
             android:name="com.del.dnews.activity.DebugActivity"
             android:screenOrientation="portrait"/>
 
+ 
+        <activity
+            android:name="com.del.dnews.activity.BusinessActivity"
+            android:screenOrientation="portrait"/>
+   
+        <activity
+            android:name="com.del.dnews.activity.EntertainmentActivity"
+            android:screenOrientation="portrait"/>
+   
+        <activity
+            android:name="com.del.dnews.activity.GeneralActivity"
+            android:screenOrientation="portrait"/>
+   
+        <activity
+            android:name="com.del.dnews.activity.SportsActivity"
+            android:screenOrientation="portrait"/>
+ 
+        <activity
+            android:name="com.del.dnews.activity.HealthActivity"
+            android:screenOrientation="portrait"/>
+    
+        <activity
+            android:name="com.del.dnews.activity.TechnologyActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="android.max_aspect"
             android:value="4.0"/>
