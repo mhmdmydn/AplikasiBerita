@@ -30,7 +30,7 @@ public class DebugActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainUtils.changeActivityFont(this, "sans_regular");
+        MainUtils.changeActivityFont(this, "sans_medium");
 		Intent intent = getIntent();
 		String errMsg = "";
 		String madeErrMsg = "";

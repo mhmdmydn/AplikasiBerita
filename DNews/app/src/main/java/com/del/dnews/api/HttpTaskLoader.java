@@ -1,4 +1,4 @@
-package com.del.dnews.helper;
+package com.del.dnews.api;
 
 import android.os.AsyncTask;
 import android.content.Context;

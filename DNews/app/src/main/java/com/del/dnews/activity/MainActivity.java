@@ -7,41 +7,24 @@ import androidx.appcompat.widget.Toolbar;
 import com.del.dnews.R;
 import androidx.cardview.widget.CardView;
 import com.del.dnews.util.MainUtils;
-import com.del.dnews.Interfaces.CallBackApi;
-import com.del.dnews.util.SPUtils;
-import com.del.dnews.helper.CountryCodeTask;
-import com.del.dnews.helper.ConstantsNews;
-import com.del.dnews.helper.ReadJsonNews;
-import com.del.dnews.Interfaces.CallbackNews;
-import java.util.List;
-import com.del.dnews.model.ModelNews;
-import org.json.JSONObject;
-import org.json.JSONException;
-import android.os.AsyncTask;
-import java.net.HttpURLConnection;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.URL;
-import java.io.InputStreamReader;
-import org.json.JSONArray;
-import java.util.ArrayList;
-import android.content.DialogInterface;
-import com.del.dnews.helper.HttpTaskLoader;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.Context;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdListener;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     
 
     private Toolbar toolbar;
+    
     private CardView cardGeneral, cardBusiness, cardEntertainment, cardHealth, cardSports, cardTechnology;
-    private SPUtils sp;
-    private String countryCodeUser;
     
-    private List<ModelNews> modelNews = new ArrayList<>();
-    
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,23 +49,42 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         cardSports.setOnClickListener(this);
         cardTechnology = (CardView)findViewById(R.id.card_technology);
         cardTechnology.setOnClickListener(this);
+        adView = (AdView)findViewById(R.id.adView);
     }
 
     @Override
     public void initLogic() {
-        sp = new SPUtils(MainActivity.this);
-        try {
-            countryCodeUser = sp.loadStringFromSharedPref("countryCode").toLowerCase();
-        } catch (Exception e) {
-            
-        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setSubtitle(MainUtils.getDayAndDate());
+        MainUtils.changeActivityFont(this, "sans_medium");
         
-        MainUtils.changeActivityFont(this, "sans_regular");
-        
-    }
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+        adView.setAdListener(new AdListener(){
+                @Override 
+                    public void onAdLoaded() {
+                        MainUtils.showToast(MainActivity.this, "Banner onAdLoaded()");
+                }
+                @Override 
+                    public void onAdFailedToLoad(int errorCode) {
+                        MainUtils.showToast(MainActivity.this, "Banner onAdFailedToLoad()" + errorCode);
+                    }
+                @Override 
+                    public void onAdOpened() {
+                        MainUtils.showToast(MainActivity.this, "onAdOpened()");
+                    }
+                @Override 
+                    public void onAdLeftApplication() {
+                        MainUtils.showToast(MainActivity.this, "onAdLeftApplication()");
+                }
+                @Override 
+                public void onAdClosed() {
+                    MainUtils.showToast(MainActivity.this, "onAdClosed()");
+                } 
+        });
+}
 
     @Override
     public void initListeners() {
@@ -97,28 +99,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         
         switch(v.getId()){
-            case R.id.card_business:
-                startActivity(new Intent(this, BusinessActivity.class));
-            break;
-            
             case R.id.card_general:
-                startActivity(new Intent(this, GeneralActivity.class));
-            break;
-            
-            case R.id.card_entertainment:
-                startActivity(new Intent(this, EntertainmentActivity.class));
-            break;
-            
-            case R.id.card_sports:
-                startActivity(new Intent(this, SportsActivity.class));
+                MainUtils.startNews(MainActivity.this, 0);
             break;
             
             case R.id.card_health:
-                startActivity(new Intent(this, HealthActivity.class));
+                MainUtils.startNews(MainActivity.this, 1);
+            break;
+            
+            case R.id.card_business:
+                MainUtils.startNews(MainActivity.this, 2);
+            break;
+            
+            case R.id.card_sports:
+                MainUtils.startNews(MainActivity.this, 3);
+            break;
+            
+            case R.id.card_entertainment:
+                MainUtils.startNews(MainActivity.this, 4);
             break;
             
             case R.id.card_technology:
-                startActivity(new Intent(this, TechnologyActivity.class));
+                MainUtils.startNews(MainActivity.this, 5);
             break;
             
            default:
@@ -131,6 +133,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }

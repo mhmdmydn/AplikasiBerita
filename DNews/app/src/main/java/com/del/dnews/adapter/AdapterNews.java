@@ -16,7 +16,11 @@ import java.net.URL;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.IOException;
-//import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
+import android.content.Intent;
+import com.del.dnews.activity.ViewContentActivity;
+import android.graphics.Typeface;
 
 public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
 
@@ -36,12 +40,34 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ModelNews mn = list.get(position);
-		
-		//Glide.with(con).load(mn.getUrlToImage()).into(holder.imgUrl);
+        final ModelNews mn = list.get(position);
+        
+		CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(con);
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(50f);
+        circularProgressDrawable.start();
+		Glide.with(con).load(mn.getUrlToImage()).placeholder(circularProgressDrawable).into(holder.imgUrl);
+        
         holder.txtTitle.setText(mn.getTitle());
-        holder.txtPublished.setText(mn.getPublishedAt());
+        holder.txtTitle.setTypeface(Typeface.createFromAsset(con.getAssets(),"fonts/sans_bold.ttf"), 0);
+        holder.txtAuthor.setText(mn.getAuthor());
+        holder.txtAuthor.setTypeface(Typeface.createFromAsset(con.getAssets(),"fonts/sans_medium.ttf"), 0);
+        holder.txtDate.setText(mn.getPublishedAt());
+        holder.txtDate.setTypeface(Typeface.createFromAsset(con.getAssets(),"fonts/sans_regular.ttf"), 0);
+        
+        holder.cardNew.setOnClickListener(new View.OnClickListener(){
 
+                @Override
+                public void onClick(View v) {
+                    Intent goWeb = new Intent();
+                    goWeb.setAction(Intent.ACTION_VIEW);
+                    goWeb.setClass(con, ViewContentActivity.class);
+                    goWeb.putExtra("title", mn.getTitle());
+                    goWeb.putExtra("author", mn.getAuthor());
+                    goWeb.putExtra("url", mn.getUrl());
+                    con.startActivity(goWeb);
+                }
+            });
     }
 
     @Override
@@ -53,15 +79,15 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
 
         CardView cardNew;
         ImageView imgUrl;
-        TextView txtTitle, txtPublished;
+        TextView txtTitle, txtDate, txtAuthor;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardNew = itemView.findViewById(R.id.card_news);
             imgUrl = itemView.findViewById(R.id.img_url);
             txtTitle = itemView.findViewById(R.id.txt_title);
-            txtPublished = itemView.findViewById(R.id.txt_author);
-
+            txtDate = itemView.findViewById(R.id.txt_time);
+            txtAuthor = itemView.findViewById(R.id.txt_author);
         }
     }
 

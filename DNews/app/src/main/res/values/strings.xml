@@ -3,11 +3,18 @@
     <string name="app_name">DNews</string>
     <string name="developby">DNews Developed by Ghodel</string>
     
-    <string name="title_general">General</string>
+    <string name="title_general">Headline</string>
     <string name="title_business">Business</string>
     <string name="title_entertainment">Entertainment</string>
     <string name="title_health">Health</string>
     <string name="title_sports">Sports</string>
-    <string name="title_technology">technology</string>
+    <string name="title_technology">Technology</string>
+    
+    <!--Admobs-->
+    <string name="Admob_ID">ca-app-pub-9576695952668383~7594117744</string>
+    <string name="Banner_ID">ca-app-pub-9576695952668383/4992484060</string>
+    <string name="Interstitial_ID">ca-app-pub-9576695952668383/7391416693</string>
+    <string name="Reward_ID">ca-app-pub-9576695952668383/5111710044</string>
+    <string name="Native_ID">ca-app-pub-9576695952668383/2227272545</string>
     
 </resources>

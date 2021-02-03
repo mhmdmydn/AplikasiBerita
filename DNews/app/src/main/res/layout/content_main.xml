@@ -16,118 +16,136 @@
 
 		<androidx.cardview.widget.CardView
 			android:id="@+id/card_general"
-			android:layout_height="150dp"
-			android:layout_width="150dp"
+			android:layout_height="@dimen/margin_150"
+			android:layout_width="@dimen/margin_150"
 			android:clickable="true"
 			android:focusable="true"
 			android:foreground="?attr/selectableItemBackground"
 			android:orientation="vertical"
-            android:gravity="center"
-			android:layout_margin="3dp"
+			android:layout_margin="@dimen/card_margin"
 			app:cardUseCompatPadding="true"
-			app:cardCornerRadius="8dp"
-			app:cardElevation="3dp">
+			app:cardCornerRadius="@dimen/corner_radius"
+			app:cardElevation="@dimen/card_elevation">
 
-			<LinearLayout
+			<RelativeLayout
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"
-                android:background="?attr/colorPrimaryDark"
-				android:orientation="vertical"
-                android:gravity="center"
-				android:padding="10dp">
+                android:gravity="center">
                 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:tint="@color/color_general"
-					android:src="@drawable/ic_general"/>
+                    android:id="@+id/img_general"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+					android:src="@drawable/img_general"/>
 
 				<TextView
+                    android:id="@+id/txt_general"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textAppearance="?android:attr/textAppearanceSmall"
 					android:text="@string/title_general"
-                    android:textColor="@color/color_general" />
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_general"
+                    android:layout_alignBottom="@+id/img_general"
+                    android:layout_alignLeft="@+id/img_general"
+                    android:layout_alignRight="@+id/img_general" />
                 
-			</LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
         
         <androidx.cardview.widget.CardView
             android:id="@+id/card_business"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
+            android:layout_height="@dimen/margin_150"
+            android:layout_width="@dimen/margin_150"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="@dimen/card_margin"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="3dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/stroke">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimaryDark"
-                android:gravity="center"
-                android:padding="10dp">
+                android:gravity="center">
 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/ic_business"
-                    android:tint="@color/color_business"/>
+                    android:id="@+id/img_business"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_business"/>
 
                 <TextView
+                    android:id="@+id/txt_business"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/title_business"
-                    android:textColor="@color/color_business"/>
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_business"
+                    android:layout_alignBottom="@+id/img_business"
+                    android:layout_alignLeft="@+id/img_business"
+                    android:layout_alignRight="@+id/img_business" />
 
-            </LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
         
         <androidx.cardview.widget.CardView
             android:id="@+id/card_entertainment"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
+            android:layout_height="@dimen/margin_150"
+            android:layout_width="@dimen/margin_150"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="@dimen/stroke"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="3dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/card_elevation">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimaryDark"
-                android:gravity="center"
-                android:padding="10dp">
+                android:gravity="center">
 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/ic_entertaiment"
-                    android:tint="@color/color_entertainment"/>
+                    android:id="@+id/img_entertainment"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_entertainment"/>
 
                 <TextView
+                    android:id="@+id/txt_entertainment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/title_entertainment"
-                    android:textColor="@color/color_entertainment"/>
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_entertainment"
+                    android:layout_alignBottom="@+id/img_entertainment"
+                    android:layout_alignLeft="@+id/img_entertainment"
+                    android:layout_alignRight="@+id/img_entertainment" />
 
-            </LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
 
@@ -139,120 +157,140 @@
 		android:orientation="vertical"
 		android:layout_weight="1.0"
 		android:gravity="center_horizontal">
+        
         <androidx.cardview.widget.CardView
             android:id="@+id/card_health"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
+            android:layout_height="@dimen/margin_150"
+            android:layout_width="@dimen/margin_150"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="@dimen/card_margin"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="3dp">
-
-            <LinearLayout
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+            
+            <RelativeLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimaryDark"
-                android:gravity="center"
-                android:padding="10dp">
+                android:gravity="center">
 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/ic_health"
-                    android:tint="@color/color_health"/>
+                    android:id="@+id/img_health"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_health"/>
 
                 <TextView
+                    android:id="@+id/txt_health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/title_health"
-                    android:textColor="@color/color_health"/>
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_health"
+                    android:layout_alignBottom="@+id/img_health"
+                    android:layout_alignLeft="@+id/img_health"
+                    android:layout_alignRight="@+id/img_health" />
 
-            </LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
         
         <androidx.cardview.widget.CardView
             android:id="@+id/card_sports"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
+            android:layout_height="@dimen/margin_150"
+            android:layout_width="@dimen/margin_150"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="@dimen/card_margin"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="3dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/card_elevation">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimaryDark"
-                android:gravity="center"
-                android:padding="10dp">
+                android:gravity="center">
 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/ic_sports"
-                    android:tint="@color/color_sports"/>
+                    android:id="@+id/img_sports"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_sports"/>
 
                 <TextView
+                    android:id="@+id/txt_sports"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/title_sports"
-                    android:textColor="@color/color_sports"/>
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_sports"
+                    android:layout_alignBottom="@+id/img_sports"
+                    android:layout_alignLeft="@+id/img_sports"
+                    android:layout_alignRight="@+id/img_sports" />
 
-            </LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
         
         <androidx.cardview.widget.CardView
             android:id="@+id/card_technology"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
+            android:layout_height="@dimen/margin_150"
+            android:layout_width="@dimen/margin_150"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="@dimen/card_margin"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="3dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/card_elevation">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimaryDark"
-                android:gravity="center"
-                android:padding="10dp">
+                android:gravity="center">
 
                 <ImageView
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/ic_technology"
-                    android:tint="@color/color_technology"/>
+                    android:id="@+id/img_technology"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:tint="@color/black_transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_technology"/>
 
                 <TextView
+                    android:id="@+id/txt_technology"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/title_technology"
-                    android:textColor="@color/color_technology"/>
+                    android:gravity="center"
+                    android:textColor="?attr/colorPrimaryDark"
+                    android:textSize="@dimen/title_card_size"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/img_technology"
+                    android:layout_alignBottom="@+id/img_technology"
+                    android:layout_alignLeft="@+id/img_technology"
+                    android:layout_alignRight="@+id/img_technology" />
 
-            </LinearLayout>
+			</RelativeLayout>
 
 		</androidx.cardview.widget.CardView>
 

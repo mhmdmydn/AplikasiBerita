@@ -4,17 +4,17 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/card_news"
 	android:layout_width="match_parent"
-	android:layout_height="250dp"
-    android:layout_margin="4dp"
+	android:layout_height="@dimen/margin_250"
+	android:layout_margin="@dimen/card_margin"
 	android:foreground="?attr/selectableItemBackgroundBorderless"
 	android:clickable="true"
 	android:focusable="true"
 	android:orientation="vertical"
-	app:cardCornerRadius="8dp">
+	app:cardCornerRadius="@dimen/corner_radius">
 
-	<LinearLayout
+	<RelativeLayout
 		android:id="@+id/layout_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical">
@@ -23,34 +23,60 @@
 			android:id="@+id/img_url"
 			android:layout_height="match_parent"
 			android:layout_width="match_parent"
-            android:layout_weight="1"
-			android:scaleType="center"
-			android:src="@android:drawable/ic_delete"/>
+			android:scaleType="centerCrop"/>
 
-		<LinearLayout
-			android:id="@+id/layout_text"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-            android:padding="8dp"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_transparent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
 
-			<TextView
-				android:id="@+id/txt_title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:text="Title"/>
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin"
+                android:textColor="?attr/android:colorControlHighlight"
+                android:textSize="@dimen/text_12"/>
 
-			<TextView
-				android:id="@+id/txt_author"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:text="Author"/>
+            <LinearLayout
+                android:id="@+id/layout_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/stroke"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal">
 
-		</LinearLayout>
+                <TextView
+                    android:id="@+id/txt_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/android:colorControlHighlight"
+                    android:gravity="center_vertical"
+                    android:textSize="10sp"
+                    android:drawableLeft="@drawable/ic_account"
+                    android:drawableTint="?attr/colorPrimary"
+                    android:layout_weight="1.0"/>
 
-	</LinearLayout>
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:padding="@dimen/stroke"
+                    android:drawableRight="@drawable/ic_time"
+                    android:drawableTint="?attr/colorPrimary"
+                    android:textSize="8sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+	</RelativeLayout>
 
 </androidx.cardview.widget.CardView>
 

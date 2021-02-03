@@ -13,6 +13,7 @@
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
+            app:contentInsetStartWithNavigation="0dp"
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
 			android:background="?attr/colorPrimary"/>
@@ -26,9 +27,17 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <!-- Your Content here -->
-                
-        <include layout="@layout/content_main" />
             
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:adSize="BANNER"
+            app:adUnitId="@string/Banner_ID">
+        </com.google.android.gms.ads.AdView>
+        
+        <include layout="@layout/content_main" />
     </LinearLayout>
-    
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

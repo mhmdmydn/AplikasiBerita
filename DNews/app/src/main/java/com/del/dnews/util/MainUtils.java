@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,19 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import android.view.animation.AnimationSet;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LayoutAnimationController;
+import androidx.recyclerview.widget.RecyclerView;
+import com.del.dnews.R;
+import com.del.dnews.api.Constants;
+import android.content.Intent;
+import com.del.dnews.activity.ListNewsActivity;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Collections;
 
 public class MainUtils {
     
@@ -139,6 +154,11 @@ public class MainUtils {
            mn.setTitle(temp.getString("title"));
            mn.setPublishedAt(convertTimeToText(temp.getString("publishedAt")));
            mn.setUrl(temp.getString("url"));
+           if(temp.getString("author").equals("null")){
+               mn.setAuthorName("No Author");
+           } else{
+               mn.setAuthorName(temp.getString("author"));
+           }
            mn.setUrlToImage(temp.getString("urlToImage"));
            list.add(mn);
        }
@@ -204,5 +224,94 @@ public class MainUtils {
         }
 
         return convTime;
+    }
+    
+    public static String getCountryCode(Context context){
+        return new String(context.getResources().getConfiguration().locale.getCountry());
+    }
+    
+    public static void setAnimation(RecyclerView rvList){
+        AnimationSet set = new AnimationSet(true); 
+        Animation fadeIn = new AlphaAnimation(0.0f, 1.0f); 
+        fadeIn.setDuration(1000); 
+        fadeIn.setFillAfter(true); 
+        set.addAnimation(fadeIn); 
+        LayoutAnimationController controller = new LayoutAnimationController(set, 0.2f); 
+        rvList.setLayoutAnimation(controller); 
+    }
+    
+    public static String getTitleCategory(int numCategory){
+        
+        switch(numCategory){
+            case 0:
+                return "Headline";
+            case 1:
+                return "Health";
+            case 2:
+                return "Business";
+            case 3:
+                return "Sports";
+            case 4:
+                return "Entertainment";
+            case 5:
+                return "Technology";
+            default:
+                return "Invalid Category";
+        }
+    }
+    
+    public static String setUrlNews(Context con, int numCategory){
+        
+        switch(numCategory){
+            case 0:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.API_KEY;
+            case 1:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.HEALTH + Constants.API_KEY;
+            case 2:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.BUSINESS + Constants.API_KEY;
+            case 3:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.SPORTS + Constants.API_KEY;
+            case 4:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.ENTERTAINMENT + Constants.API_KEY;
+            case 5:
+                return Constants.BASE_URL + getCountryCode(con) + Constants.TECHNOLOGY + Constants.API_KEY;
+            default:
+                return new String("Invalid URL");
+        }
+    }
+    
+    public static void startNews(Activity activity, int setType){
+        Intent in = new Intent();
+        in.setAction(Intent.ACTION_VIEW);
+        in.putExtra("number", String.valueOf(setType));
+        in.setClass(activity, ListNewsActivity.class);
+        activity.startActivity(in);
+    }
+    
+    public static CharSequence getDayAndDate(){
+        Calendar cal = Calendar.getInstance();
+        return new SimpleDateFormat("EEE, d MMM yyyy").format(cal.getTime());
+    }
+    
+    public static void sortNameByAsc(List<ModelNews> list){
+        Comparator<ModelNews> comparator = new Comparator<ModelNews>() {
+
+            @Override
+            public int compare(ModelNews object1, ModelNews object2) {
+                return object1.getAuthor().compareToIgnoreCase(object2.getAuthor());
+            }
+        };
+        Collections.sort(list, comparator);
+    }
+    
+    public static void sortNameByDesc(List<ModelNews> list){
+        Comparator<ModelNews> comparator = new Comparator<ModelNews>() {
+
+            @Override
+            public int compare(ModelNews object1, ModelNews object2) {
+                return object2.getAuthor().compareToIgnoreCase(object1.getAuthor());
+            }
+        };
+        Collections.sort(list, comparator);
     }
 }

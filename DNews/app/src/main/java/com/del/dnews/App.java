@@ -10,23 +10,18 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import com.del.dnews.activity.DebugActivity;
-import com.del.dnews.helper.CountryCodeTask;
-import com.del.dnews.Interfaces.CallBackApi;
-import org.json.JSONObject;
-import org.json.JSONException;
-import com.del.dnews.util.MainUtils;
-import com.del.dnews.util.SPUtils;
-//import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.MobileAds;
+import com.del.dnews.R;
 
 public class App extends Application {
     
 	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-    private SPUtils sp;
+
     
 	@Override
 	public void onCreate() {
-
-		//MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        
+        MobileAds.initialize(this, getString(R.string.Admob_ID));
 
 		this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -44,28 +39,6 @@ public class App extends Application {
 				}
 			});
 		super.onCreate();
-        sp = new SPUtils(getApplicationContext());
-        
-        new CountryCodeTask(getApplicationContext(), new CallBackApi(){
-
-                @Override
-                public void onReceiveJsonApi(String result) {
-                    try {
-                        JSONObject obj = new JSONObject(result);
-                        String country = obj.getString("countryCode");
-                        sp.saveToSharedPref("countryCode", country);
-                    } catch (JSONException e) {
-                        
-                    } catch (Exception e) {
-                        
-                    }
-                }
-
-                @Override
-                public void onError(String error) {
-                    
-                }
-            }).execute("http://ip-api.com/json/");
         
 	}
 	private String getStackTrace(Throwable th) {

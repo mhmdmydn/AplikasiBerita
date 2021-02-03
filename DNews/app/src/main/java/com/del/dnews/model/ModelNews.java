@@ -6,6 +6,7 @@ public class ModelNews {
     private String publishedAt;
     private String url;
     private String urlToImage;
+    private String author;
 
     public void setTitle(String title) {
         this.title = title;
@@ -21,6 +22,14 @@ public class ModelNews {
 
     public void setUrlToImage(String urlToImage) {
         this.urlToImage = urlToImage;
+    }
+    
+    public void setAuthorName(String author){
+        this.author = author;
+    }
+    
+    public String getAuthor(){
+        return author;
     }
 
     public String getTitle() {
