@@ -1,4 +1,5 @@
 package com.del.dnews.model;
+import java.util.Comparator;
 
 public class ModelNews {
 
@@ -47,4 +48,30 @@ public class ModelNews {
     public String getUrlToImage() {
         return urlToImage;
     }
+    
+    public static Comparator<ModelNews> sortByTitle = new Comparator<ModelNews>(){
+
+        @Override
+        public int compare(ModelNews object1, ModelNews object2) {
+            
+            return - Integer.valueOf(object1.title).compareTo(Integer.valueOf(object2.title));
+        }
+    };
+    
+    public static Comparator<ModelNews> sortByAuthor = new Comparator<ModelNews>(){
+
+        @Override
+        public int compare(ModelNews object1, ModelNews object2) {
+            return - Integer.valueOf(object1.author).compareTo(Integer.valueOf(object2.author));
+        }
+    };
+    
+    
+    public static Comparator<ModelNews> sortByDate = new Comparator<ModelNews>(){
+
+        @Override
+        public int compare(ModelNews object1, ModelNews object2) {
+            return - Integer.valueOf(object1.publishedAt).compareTo(Integer.valueOf(object2.publishedAt));
+        }
+    };
 }

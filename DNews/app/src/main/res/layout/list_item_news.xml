@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
-                android:textColor="?attr/android:colorControlHighlight"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="@dimen/text_12"/>
 
             <LinearLayout
@@ -56,22 +56,22 @@
                     android:id="@+id/txt_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/android:colorControlHighlight"
                     android:gravity="center_vertical"
                     android:textSize="10sp"
+                    android:textColor="?attr/android:windowBackground"
+                    android:drawableTint="?attr/android:windowBackground"
                     android:drawableLeft="@drawable/ic_account"
-                    android:drawableTint="?attr/colorPrimary"
                     android:layout_weight="1.0"/>
 
                 <TextView
                     android:id="@+id/txt_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorPrimary"
                     android:gravity="center"
                     android:padding="@dimen/stroke"
+                    android:textColor="?attr/android:windowBackground"
+                    android:drawableTint="?attr/android:windowBackground"
                     android:drawableRight="@drawable/ic_time"
-                    android:drawableTint="?attr/colorPrimary"
                     android:textSize="8sp"/>
 
             </LinearLayout>

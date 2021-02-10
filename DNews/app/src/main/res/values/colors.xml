@@ -3,7 +3,7 @@
    	<!--Light Mode-->
 	<color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#212121</color>
+    <color name="colorAccent">#F44336</color>
     <color name="bg_light">#FFFFFF</color>
 	<color name="colorControlHighlight">#EEEEEE</color>
    	<color name="colorControlNormal">#000000</color>
@@ -11,12 +11,15 @@
 	<color name="colorTextSecondLight">#999999</color>
 	<color name="overFlowStyleColor">#000000</color>
 	<!--Dark Mode-->
-	<color name="colorPrimaryNight">#303030</color>
+    <color name="colorPrimaryNight">#212121</color>
     <color name="colorPrimaryDarkNight">#212121</color>
-    <color name="colorAccentNight">#FAFAFA</color>
-    <color name="bg_dark">#212121</color>
-	<color name="colorTextDark">#FFFFFF</color>
-	<color name="colorTextSecondDark">#EEEEEE</color>
+    <color name="colorAccentNight">#F44336</color>
+    <color name="bg_night">#FFFFFF</color>
+    <color name="colorControlHighlightNight">#333333</color>
+    <color name="colorControlNormalNight">#FFFFFF</color>
+    <color name="colorTextNight">#FFFFFF</color>
+    <color name="colorTextSecondNight">#FFFFFF</color>
+	<color name="overFlowStyleColorNight">#FFFFFF</color>
     
     <!--image tint color-->
     <color name="color_general">#2196F3</color>
@@ -27,6 +30,6 @@
     <color name="color_technology">#3F51B5</color>
     
     <color name="black_transparent">#65000000</color>
-    
+    <color name="white_transparent">#65FFFFFF</color>
     
 </resources>

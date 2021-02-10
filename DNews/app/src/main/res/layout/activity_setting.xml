@@ -19,27 +19,11 @@
             android:background="?attr/colorPrimary"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:id="@+id/root"
+    
+    <FrameLayout
+        android:id="@+id/setting_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_general"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_weight="1.0"
-            android:layoutAnimation="@anim/layout_animation_fall_down"/>
-        
-        <RelativeLayout
-            android:id="@+id/base_unity_banner"
-            android:gravity="center"
-            android:background="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        
-    </LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

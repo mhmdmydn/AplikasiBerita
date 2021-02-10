@@ -17,27 +17,24 @@
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
 			android:background="?attr/colorPrimary"/>
-            
+
     </com.google.android.material.appbar.AppBarLayout>
-    
+
     <LinearLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <!-- Your Content here -->
+        <!-- Your Content here -->
             
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            app:adSize="BANNER"
-            app:adUnitId="@string/Banner_ID">
-        </com.google.android.gms.ads.AdView>
+        <RelativeLayout
+            android:id="@+id/base_unity_banner"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         
         <include layout="@layout/content_main" />
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

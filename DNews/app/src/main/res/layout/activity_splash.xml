@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:textColor="@color/colorPrimary"
+    android:background="?attr/colorPrimary"
 	android:orientation="vertical"
 	android:gravity="center">
 
@@ -14,9 +14,8 @@
 		android:layout_weight="1"
 		android:gravity="center">
 
-		<ImageView
+		<com.del.dnews.util.AppIconView
 			android:id="@+id/app_logo"
-			android:src="@drawable/ic_launcher"
 			android:layout_height="100dp"
 			android:layout_width="100dp"/>
 
@@ -32,7 +31,7 @@
 			android:id="@+id/app_name"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:textColor="?attr/android:textColorPrimary"
+			android:textColor="?attr/android:colorControlNormal"
 			android:textStyle="normal"
 			android:textSize="12sp"
 			android:text="@string/developby"/>

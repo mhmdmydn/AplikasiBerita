@@ -3,16 +3,19 @@ package com.del.dnews.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,34 +23,37 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+import com.del.dnews.R;
+import com.del.dnews.activity.ListNewsActivity;
+import com.del.dnews.api.Constants;
 import com.del.dnews.model.ModelNews;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.view.animation.AnimationSet;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.LayoutAnimationController;
-import androidx.recyclerview.widget.RecyclerView;
-import com.del.dnews.R;
-import com.del.dnews.api.Constants;
-import android.content.Intent;
-import com.del.dnews.activity.ListNewsActivity;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.Collections;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.content.pm.ApplicationInfo;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+import android.net.Uri;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MainUtils {
     
@@ -154,6 +160,7 @@ public class MainUtils {
            mn.setTitle(temp.getString("title"));
            mn.setPublishedAt(convertTimeToText(temp.getString("publishedAt")));
            mn.setUrl(temp.getString("url"));
+           
            if(temp.getString("author").equals("null")){
                mn.setAuthorName("No Author");
            } else{
@@ -164,21 +171,6 @@ public class MainUtils {
        }
        return list;
    }
-   
-    public static Bitmap getbmpfromURL(String surl){
-        try {
-            URL url = new URL(surl);
-            HttpURLConnection urlcon = (HttpURLConnection) url.openConnection();
-            urlcon.setDoInput(true);
-            urlcon.connect();
-            InputStream in = urlcon.getInputStream();
-            Bitmap mIcon = BitmapFactory.decodeStream(in);
-            return  mIcon;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
     
     public static String convertTimeToText(String dataDate) {
 
@@ -293,18 +285,43 @@ public class MainUtils {
         return new SimpleDateFormat("EEE, d MMM yyyy").format(cal.getTime());
     }
     
-    public static void sortNameByAsc(List<ModelNews> list){
-        Comparator<ModelNews> comparator = new Comparator<ModelNews>() {
+    public static void sortByAsc(List<ModelNews> list, int pos){
+        switch(pos){
+            case 0:
+                Comparator<ModelNews> soryByTitle = new Comparator<ModelNews>() {
 
-            @Override
-            public int compare(ModelNews object1, ModelNews object2) {
-                return object1.getAuthor().compareToIgnoreCase(object2.getAuthor());
-            }
-        };
-        Collections.sort(list, comparator);
+                    @Override
+                    public int compare(ModelNews object1, ModelNews object2) {
+                        return object1.getTitle().compareToIgnoreCase(object2.getTitle());
+                    }
+                };
+                Collections.sort(list, soryByTitle);
+               break;
+               case 1:
+                Comparator<ModelNews> sortByAuthor = new Comparator<ModelNews>() {
+
+                    @Override
+                    public int compare(ModelNews object1, ModelNews object2) {
+                        return object1.getAuthor().compareToIgnoreCase(object2.getAuthor());
+                    }
+                };
+                Collections.sort(list, sortByAuthor);
+                break;
+                case 2:
+                Comparator<ModelNews> sortByTime = new Comparator<ModelNews>() {
+
+                    @Override
+                    public int compare(ModelNews object1, ModelNews object2) {
+                        return object1.getPublishedAt().compareToIgnoreCase(object2.getPublishedAt());
+                    }
+                };
+                Collections.sort(list, sortByTime);
+                break;
+        }
+        
     }
     
-    public static void sortNameByDesc(List<ModelNews> list){
+    public static void sortByDesc(List<ModelNews> list){
         Comparator<ModelNews> comparator = new Comparator<ModelNews>() {
 
             @Override
@@ -314,4 +331,142 @@ public class MainUtils {
         };
         Collections.sort(list, comparator);
     }
+    
+    
+    public static void setAnimFallDown(Context con , RecyclerView recyclerview) {
+        
+        int resId = R.anim.layout_animation_fall_down;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(con, resId);
+        recyclerview.setLayoutAnimation(animation);
+        
+    }
+
+    public static void shareUrl(Context con, String title, String author , String url) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("DNews app");
+      sb.append("\n========");
+      sb.append("\nTitle : " + title);
+      sb.append("\nAuthor : " + author);
+      sb.append("\nSources : " + url);
+      
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        share.putExtra(Intent.EXTRA_TEXT, sb.toString());
+        con.startActivity(Intent.createChooser(share, "Share to : "));
+        
+      }
+      
+      
+      public static void startButtonAnim(Context context, View v){
+          Animation btnAnim = AnimationUtils.loadAnimation(context, R.anim.click_anim);
+          v.startAnimation(btnAnim);
+      }
+      
+    public static void restart(Context context) {
+        PackageManager pm = context.getPackageManager();
+        Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
+        if (intent != null) {
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+            );
+            context.startActivity(intent);
+        }
+        ((Activity)context).finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
+    
+    public static String prefGetAll(Context con){
+        StringBuilder result = new StringBuilder();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(con);
+        
+        Map <String, ? > getKeyAndValue = sharedPref.getAll();
+        for(Map.Entry<String, ?> entry : getKeyAndValue.entrySet()){
+            result.append("Key : ").append(entry.getKey()).append("\n").append("Value : ").append(entry.getValue().toString());
+        }
+        return result.toString();
+    }
+    
+    public static void sendReportBug(Context con, String body){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ghodelchibar@gmail.com"});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Report find bug");
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        con.startActivity(Intent.createChooser(intent, "Choose email client"));
+    }
+    
+    public static void shareApplication(Context context) {
+        ApplicationInfo app = context.getApplicationInfo();
+        String filePath = app.sourceDir;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+        // MIME of .apk is "application/vnd.android.package-archive".
+        // but Bluetooth does not accept this. Let's use "*/*" instead.
+        intent.setType("*/*");
+
+        // Append file and send Intent
+        File originalApk = new File(filePath);
+
+        try {
+            //Make new directory in new location
+            File tempFile = new File(context.getExternalCacheDir() + "/DNews");
+            //If directory doesn't exists create new
+            if (!tempFile.isDirectory())
+                if (!tempFile.mkdirs())
+                    return;
+            //Get application's name and convert to lowercase
+            tempFile = new File(tempFile.getPath() + "/" + context.getString(app.labelRes).replace(" ","").toLowerCase() + ".apk");
+            //If file doesn't exists create new
+            if (!tempFile.exists()) {
+                if (!tempFile.createNewFile()) {
+                    return;
+                }
+            }
+            //Copy file to new location
+            InputStream in = new FileInputStream(originalApk);
+            OutputStream out = new FileOutputStream(tempFile);
+
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+            System.out.println("File copied.");
+            //Open share dialog
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tempFile));
+            context.startActivity(Intent.createChooser(intent, "Share app via"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void showPrivacyPolicy(Context context, String title,String content, DialogInterface.OnClickListener close){
+        
+        AlertDialog.Builder alert = new AlertDialog.Builder(context); 
+        alert.setTitle(title);
+
+        WebView wv = new WebView(context);
+        wv.loadUrl(content);
+        wv.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+
+                    return true;
+                }
+            });
+
+        alert.setView(wv);
+        alert.setNegativeButton("Close", close);
+        alert.show();
+    }
+    
+    
 }

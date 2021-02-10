@@ -8,11 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
 		<item	name="android:colorControlHighlight">@color/colorControlHighlight</item>
 		<item	name="android:colorControlNormal">@color/colorControlNormal</item>
-       		<item name="android:textColorPrimary">@color/colorTextLight</item>
-       		<item name="android:textColorSecondary">@color/colorTextSecondLight</item>
-       		<item name="android:windowBackground">@color/bg_light</item>
+        <item name="android:textColorPrimary">@color/colorTextLight</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondLight</item>
+        <item name="android:windowBackground">@color/bg_light</item>
         <item name="actionOverflowButtonStyle">@style/overflowButtonStyle</item>
-       		<item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
 		<item name="android:windowActivityTransitions">true</item>
         <item name="android:windowEnterTransition">@android:transition/slide_right</item>
         <item name="android:windowExitTransition">@android:transition/slide_left</item>
@@ -25,9 +25,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    
+
    	<style name="overflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/overFlowStyleColor</item>
    	</style>
-    
+
 </resources>

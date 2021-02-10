@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    
+    <item
+        android:id="@+id/sorting"
+        android:icon="@drawable/ic_sort"
+        android:title="@string/title_sort"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/by_title"
+                android:showAsAction="always"
+                android:title="Sort by title"/>            
+            <item
+                android:id="@+id/by_author"
+                android:showAsAction="always"
+                android:title="Sort by author"/>
+            <item
+                android:id="@+id/by_date"
+                android:showAsAction="always"
+                android:title="Sort by time"/>
+		</menu>
+    </item>
+</menu>

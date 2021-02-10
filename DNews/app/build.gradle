@@ -21,13 +21,14 @@ android {
 }
 
 dependencies {
+    
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
     implementation 'com.android.support:support-v4:18.0.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.kaopiz:kprogresshud:1.2.0'
+    implementation 'com.unity3d.ads:unity-ads:3.6.0'
     
 }

@@ -10,11 +10,28 @@
     <string name="title_sports">Sports</string>
     <string name="title_technology">Technology</string>
     
-    <!--Admobs-->
-    <string name="Admob_ID">ca-app-pub-9576695952668383~7594117744</string>
-    <string name="Banner_ID">ca-app-pub-9576695952668383/4992484060</string>
-    <string name="Interstitial_ID">ca-app-pub-9576695952668383/7391416693</string>
-    <string name="Reward_ID">ca-app-pub-9576695952668383/5111710044</string>
-    <string name="Native_ID">ca-app-pub-9576695952668383/2227272545</string>
+    <!--UnityAds-->
+    <string name="GAME_ID">3994707</string>
+    <string name="BANNER_ID">BannerAds</string>
+    <string name="INTERSTITIAL_ID">InterstitialAds</string>
+    <string name="REWARD_ID">rewardedVideo</string>
+    <string name="VIDEO_ID">InterstitialAds</string>
     
+    <string name="title_sort">Sort Content</string>
+    <string name="title_share">Share Content</string>
+    
+    <!--Preferences String-->
+    <string name="header_title_general">General</string>
+    <string name="title_switch_theme">Dark Mode</string>
+    <string name="summary_switch_theme">Experience dark mode to keep your eyes clear of screen brightness</string>
+    
+    <string name="header_title_about_app">About App</string>
+    <string name="summary_dev_name">Ghodel</string>
+    <string name="title_dev_name">Developer</string>
+    <string name="url_developer">https://github.com/ghodel-dev</string>
+    <string name="summary_app_version">V.1.0</string>
+    <string name="title_app_version">Version</string>
+    <string name="summary_share_app">Share with your friends</string>
+    <string name="share_app">Share App</string>
+    <string name="title_privacy_policy">Privacy Policy</string>
 </resources>

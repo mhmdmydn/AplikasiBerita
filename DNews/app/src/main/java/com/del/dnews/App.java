@@ -1,56 +1,47 @@
 package com.del.dnews;
 
-import android.app.AlarmManager;
-import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import com.del.dnews.activity.DebugActivity;
-import com.google.android.gms.ads.MobileAds;
 import com.del.dnews.R;
+import com.del.dnews.util.CrashHandler;
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import androidx.appcompat.app.AppCompatDelegate;
+import android.content.Intent;
+import android.app.Activity;
 
 public class App extends Application {
     
-	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-
+    public static String NIGHT_MODE = "dark_theme";
+    private Boolean isNightModeEnabled = false;
+    private static App mApp = null;
+    private SharedPreferences mPrefs;
+    
+    public static App getInstance() {
+        if (mApp == null) {
+            mApp = new App();
+        }
+        return mApp;
+    }
     
 	@Override
 	public void onCreate() {
-        
-        MobileAds.initialize(this, getString(R.string.Admob_ID));
-
-		this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-				@Override
-				public void uncaughtException(Thread thread, Throwable ex) {
-					Intent intent = new Intent(getApplicationContext(), DebugActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					intent.putExtra("error", getStackTrace(ex));
-					PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
-					AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-					am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
-					android.os.Process.killProcess(android.os.Process.myPid());
-					System.exit(2);
-					uncaughtExceptionHandler.uncaughtException(thread, ex);
-				}
-			});
 		super.onCreate();
+        mApp = this;
+        CrashHandler.init(mApp);
         
+        //PreferenceManager.setDefaultValues(this, R.xml.setting_preferences, false);
+        //this.isNightModeEnabled = mPrefs.getBoolean(NIGHT_MODE, false);
 	}
-	private String getStackTrace(Throwable th) {
-		final Writer result = new StringWriter();
-		final PrintWriter printWriter = new PrintWriter(result);
-		Throwable cause = th;
-		while (cause != null) {
-			cause.printStackTrace(printWriter);
-			cause = cause.getCause();
-		}
-		final String stacktraceAsString = result.toString();
-		printWriter.close();
-		return stacktraceAsString;
-	}
+    
+    public boolean isNightModeEnabled() {
+        return isNightModeEnabled;
+    }
+
+    public void setIsNightModeEnabled(SharedPreferences mPrefs , boolean isNightModeEnabled) {
+        this.isNightModeEnabled = isNightModeEnabled;
+        this.mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putBoolean(NIGHT_MODE, isNightModeEnabled);
+        editor.apply();
+    }
 }
