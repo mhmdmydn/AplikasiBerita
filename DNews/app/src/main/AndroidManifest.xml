@@ -12,6 +12,12 @@
     <!--mencegah ponsel menjadi tidak aktif-->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
+    <!--baca konten kartu SD Anda-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!--mengubah atau menghapus konten kartu SD Anda-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:name="com.del.dnews.App"
@@ -43,12 +49,12 @@
             android:hardwareAccelerated="true"
             android:supportsPictureInPicture="true"
             android:screenOrientation="portrait"/>
-        
-        <activity 
+
+        <activity
             android:label="App Crash"
             android:name="com.del.dnews.util.CrashHandler$CrashActiviy"
             android:screenOrientation="portrait"/>
-        
+
         <activity
             android:name="com.del.dnews.activity.ListNewsActivity"
             android:screenOrientation="portrait"/>
@@ -56,11 +62,11 @@
         <activity
             android:name="com.del.dnews.activity.ViewContentActivity"
             android:screenOrientation="portrait"/>
-        
+
         <activity
             android:name="com.del.dnews.activity.SettingActivity"
             android:screenOrientation="portrait"/>
-        
+
         <meta-data
             android:name="android.max_aspect"
             android:value="4.0"/>
